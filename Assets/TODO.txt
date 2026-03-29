@@ -1,0 +1,3 @@
+- refactor input logic to be more ECS
+- shockwave
+- sprites (zombie game in a cemetary, we have a shotgun, cartoony)
