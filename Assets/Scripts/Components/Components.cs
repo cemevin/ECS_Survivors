@@ -112,3 +112,13 @@ public struct ShockwaveImpactCooldown : IComponentData, IEnableableComponent
 {
     public float ExpiryTime;
 }
+
+[MaterialProperty("_Fill")]
+public struct HealthBarFill : IComponentData
+{
+    public float Value;
+}
+public struct HealthBarOwner : IComponentData
+{
+    public Entity EnemyEntity; 
+}
