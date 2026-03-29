@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2254854780922011706}
   - component: {fileID: 4931751454211225064}
   - component: {fileID: -6645034608899870096}
+  - component: {fileID: 3659722409081098650}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -109,7 +110,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -129,3 +130,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAuthoring
   MoveSpeed: 10
   MaxHealth: 100
+  FireRate: 0.25
+  ProjectileCount: 8
+  ShockwaveCooldownDuration: 10
+--- !u!114 &3659722409081098650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797328300281380352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb21772c9a6dc5b49a4ac42443480c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputAuthoring

@@ -10,7 +10,8 @@ public partial struct SpawnSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         float dt = SystemAPI.Time.DeltaTime;
-        var ecb = new EntityCommandBuffer(Allocator.Temp);
+        var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
+        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
         // Get player position — query for the singleton
         var playerQuery = SystemAPI.QueryBuilder()
@@ -50,8 +51,5 @@ public partial struct SpawnSystem : ISystem
                 ecb.SetComponent(e, LocalTransform.FromPosition(spawnPos));
             }
         }
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
     }
 }

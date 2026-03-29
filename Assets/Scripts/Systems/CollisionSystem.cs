@@ -4,12 +4,14 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using Unity.Collections;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
 public partial struct CollisionSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
-        var ecb = new EntityCommandBuffer(Allocator.Temp);
+        var ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
+        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
         foreach (var (projTransform, damage, impulseOnHit, projEntity) in
             SystemAPI.Query<RefRO<LocalTransform>, RefRO<Damage>, RefRO<ImpulseOnHit>>()
@@ -40,8 +42,5 @@ public partial struct CollisionSystem : ISystem
                 break; // projectile is gone, stop checking enemies
             }
         }
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
     }
 }

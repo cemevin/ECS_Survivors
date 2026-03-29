@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="GameUI.uss" />
+    <ui:VisualElement name="hud">
+        <ui:Label name="enemy-count" text="Enemies: 0" />
+        <ui:Label name="health" text="HP: 0/0" />
+        <ui:Label name="shockwave" text="Shockwave: Ready" />
+    </ui:VisualElement>
+</ui:UXML>

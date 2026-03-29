@@ -10,7 +10,8 @@ public partial struct LifetimeSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         float dt = SystemAPI.Time.DeltaTime;
-        var ecb = new EntityCommandBuffer(Allocator.Temp);
+        var ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
+        var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
         foreach (var (lifetime, entity) in
             SystemAPI.Query<RefRW<Lifetime>>().WithEntityAccess())
@@ -21,8 +22,5 @@ public partial struct LifetimeSystem : ISystem
                 ecb.DestroyEntity(entity);
             }
         }
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();  
     }
 }

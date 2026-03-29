@@ -3,7 +3,7 @@
     "name": "PlayerActionMap",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "b96ca736-ec16-4bcc-b9c5-6ddaa1b857b8",
             "actions": [
                 {
@@ -34,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FireDir",
+                    "name": "Aim",
                     "type": "Value",
                     "id": "e424ef76-9391-494b-beb8-793c7d51b52f",
                     "expectedControlType": "Vector2",
@@ -161,7 +161,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FireDir",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

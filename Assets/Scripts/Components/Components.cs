@@ -1,3 +1,4 @@
+using Unity.Rendering;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -44,6 +45,7 @@ public struct MoveSpeed : IComponentData
 
 public struct ShockwaveData : IComponentData
 {
+    public float Damage;
     public float CurrentRadius;
     public float MaxRadius;
     public float PushForce;
@@ -54,31 +56,26 @@ public struct ImpulseVelocity : IComponentData
 {
     public float3 Value;
 }
-public struct PlayerInput : IComponentData
-{
-    public float3 MoveDirection;
-    public bool FirePressed;
-    public bool ShockwavePressed;
-}
 
 public struct WeaponData : IComponentData
 {
     public float FireRate;     // seconds between shots
     public float Timer;        // counts down to 0 then resets
     public int ProjectileCount; // how many per burst, e.g. 8 for circular spread
-}
+    public float ShockwaveCooldownDuration;
+    public float CurrentShockwaveCooldown;
+} 
 public struct ProjectilePrefabRef : IComponentData
+{
+    public Entity Value; 
+}
+public struct ShockwavePrefabRef : IComponentData
 {
     public Entity Value;
 }
 public struct PrefabScale : IComponentData
 {
     public float Value;
-}
-
-public struct AimDirection : IComponentData
-{
-    public float3 Value;
 }
  
 public struct SpawnerData : IComponentData
@@ -95,4 +92,23 @@ public struct SpawnerData : IComponentData
     public float SpawnBandWidth;  // how wide the band is
     public Entity EnemyPrefab;
 
+}
+public struct PlayerInput : IComponentData
+{
+    public float2 MoveStick;
+    public float2 AimStick; 
+    public bool AimWithMouse;
+    public bool FireHeld;
+    public bool ShockwavePressed;
+}
+
+[MaterialProperty("_Radius")]
+public struct ShockwaveRadius : IComponentData
+{
+    public float Value;
+}
+
+public struct ShockwaveImpactCooldown : IComponentData, IEnableableComponent
+{
+    public float ExpiryTime;
 }

@@ -1,7 +1,9 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
 public partial struct PlayerMoveSystem : ISystem
 {
@@ -13,7 +15,8 @@ public partial struct PlayerMoveSystem : ISystem
             SystemAPI.Query<RefRW<LocalTransform>, RefRO<PlayerInput>, RefRO<MoveSpeed>>()
                      .WithAll<PlayerTag>())
         {
-            transform.ValueRW.Position += input.ValueRO.MoveDirection * speed.ValueRO.Value * dt;
+            float3 Move = new float3(input.ValueRO.MoveStick.x, 0, input.ValueRO.MoveStick.y);
+            transform.ValueRW.Position += Move * speed.ValueRO.Value * dt;
         }
     }
 }
