@@ -4,6 +4,10 @@ A Vampire Survivors-style demo built in a weekend to get up to speed with
 Unity 6 ECS/DOTS as a gameplay programmer. Focuses on performance 
 characteristics and developer ergonomics of the DOTS stack.
 
+## Video Demonstration
+
+[![Watch the video](https://img.youtube.com/vi/wdxXGaRUfCA/maxresdefault.jpg)](https://www.youtube.com/watch?v=wdxXGaRUfCA)
+
 ## Features
 
 - 1000+ simultaneous enemies via Unity ECS
