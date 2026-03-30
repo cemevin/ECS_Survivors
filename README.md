@@ -5,8 +5,8 @@ Unity 6 ECS/DOTS as a gameplay programmer. Focuses on performance
 characteristics and developer ergonomics of the DOTS stack.
 
 ## Video Demonstration
-
-[![Watch the video](https://img.youtube.com/vi/wdxXGaRUfCA/maxresdefault.jpg)](https://www.youtube.com/watch?v=wdxXGaRUfCA)
+Click the image below to watch gameplay footage:
+[![Watch the video](./screenshot.png)](https://www.youtube.com/watch?v=wdxXGaRUfCA)
 
 ## Features
 
