@@ -18,6 +18,7 @@ public class PlayerAuthoring : MonoBehaviour
             AddComponent(e, new PlayerTag());
             AddComponent(e, new MoveSpeed { Value = authoring.MoveSpeed });
             AddComponent(e, new Health { Current = authoring.MaxHealth, Max = authoring.MaxHealth });
+            AddComponent(e, new PlayerAimDirection()); 
 
             AddComponent(e, new WeaponData 
             { 

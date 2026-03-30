@@ -19,7 +19,8 @@ public partial struct CollisionSystem : ISystem
         {
             foreach (var (enemyTransform, health, impulseVelocity, enemyEntity) in
                 SystemAPI.Query<RefRO<LocalTransform>, RefRW<Health>, RefRW<ImpulseVelocity>>()
-                         .WithAll<EnemyTag>().WithEntityAccess())
+                         .WithAll<EnemyTag>().WithAbsent<DyingTag>()
+                         .WithEntityAccess())
             {
                 float dist = math.distance(
                     projTransform.ValueRO.Position,
@@ -32,7 +33,9 @@ public partial struct CollisionSystem : ISystem
                 ecb.DestroyEntity(projEntity);
 
                 if (health.ValueRO.Current <= 0f)
-                    ecb.DestroyEntity(enemyEntity);
+                {
+                    ecb.AddComponent(enemyEntity, new DyingTag());
+                }
                 else
                 {
                     var impulseDir = math.normalizesafe(enemyTransform.ValueRO.Position - projTransform.ValueRO.Position);

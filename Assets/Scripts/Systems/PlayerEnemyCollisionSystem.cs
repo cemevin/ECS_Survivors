@@ -16,7 +16,7 @@ public partial struct PlayerEnemyCollisionSystem : ISystem
         {
             foreach (var (enemyTransform, damage) in
                 SystemAPI.Query<RefRO<LocalTransform>, RefRO<Damage>>()
-                         .WithAll<EnemyTag>())
+                         .WithAll<EnemyTag>().WithAbsent<DyingTag>())
             {
                 float dist = math.distance(
                     playerTransform.ValueRO.Position,
@@ -28,4 +28,4 @@ public partial struct PlayerEnemyCollisionSystem : ISystem
             }
         }
     }
-}
+} 

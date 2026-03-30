@@ -17,9 +17,9 @@ public partial struct EnemyMoveSystem : ISystem
 
         float dt = SystemAPI.Time.DeltaTime;
 
-        foreach (var (transform, impulseVelocity, damage, speed) in
-            SystemAPI.Query<RefRW<LocalTransform>, RefRW<ImpulseVelocity>, RefRO<Damage>, RefRO<MoveSpeed>>()
-                     .WithAll<EnemyTag>())
+        foreach (var (transform, impulseVelocity, damage, speed, flip) in
+            SystemAPI.Query<RefRW<LocalTransform>, RefRW<ImpulseVelocity>, RefRO<Damage>, RefRO<MoveSpeed>, RefRW<SpriteFlipX>>()
+                     .WithAll<EnemyTag>().WithAbsent<DyingTag>())
         {
             // combine player seek + impulse velocities and update transform
             float3 distvec = playerPos - transform.ValueRO.Position;
@@ -37,6 +37,9 @@ public partial struct EnemyMoveSystem : ISystem
 
             // decay impulse
             impulseVelocity.ValueRW.Value *= math.exp(-8f * dt); // tune the 8f for bleed-off speed
+
+            // flip based on horizontal direction to player
+            flip.ValueRW.Value = dir.x < 0 ? 1f : 0f;
         }
     }
 }

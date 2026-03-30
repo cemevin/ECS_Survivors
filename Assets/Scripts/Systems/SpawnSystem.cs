@@ -48,7 +48,11 @@ public partial struct SpawnSystem : ISystem
                     math.sin(angle) * radius);
 
                 Entity e = ecb.Instantiate(spawner.ValueRO.EnemyPrefab);
-                ecb.SetComponent(e, LocalTransform.FromPosition(spawnPos));
+                ecb.SetComponent(e, LocalTransform.FromPositionRotationScale(
+                    spawnPos,
+                    quaternion.Euler(math.radians(90f), 0f, 0f),
+                    1f
+                ));
             }
         }
     }

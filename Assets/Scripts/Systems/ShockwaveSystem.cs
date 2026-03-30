@@ -42,7 +42,7 @@ public partial struct ShockwaveSystem : ISystem
             // then iterate enemies against collected shockwave data
             foreach (var (enemyTransform, health, impulse, enemyEntity) in
                 SystemAPI.Query<RefRO<LocalTransform>, RefRW<Health>, RefRW<ImpulseVelocity>>()
-                        .WithAll<EnemyTag>().WithDisabled<ShockwaveImpactCooldown>()
+                        .WithAll<EnemyTag>().WithAbsent<DyingTag>().WithDisabled<ShockwaveImpactCooldown>()
                         .WithEntityAccess())
             {
                 for (int i = 0; i < shockwaves.Length; i++)
@@ -54,7 +54,9 @@ public partial struct ShockwaveSystem : ISystem
                         health.ValueRW.Current -= dmg;
 
                         if (health.ValueRO.Current <= 0f)
-                            ecb.DestroyEntity(enemyEntity);
+                        {
+                            ecb.AddComponent(enemyEntity, new DyingTag());
+                        }
                         else
                         {
                             float3 pushDir = math.normalizesafe(enemyTransform.ValueRO.Position - origin);

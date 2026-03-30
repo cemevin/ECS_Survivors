@@ -9,7 +9,7 @@ public struct ProjectileTag : IComponentData { }
 public struct AoeTag : IComponentData { }
 public struct ShockwaveTag : IComponentData { }
 public struct PlayerTag : IComponentData { }
-
+public struct DyingTag : IComponentData { }
 public struct Direction : IComponentData
 {
     public float3 Value;
@@ -99,7 +99,12 @@ public struct PlayerInput : IComponentData
     public float2 AimStick; 
     public bool AimWithMouse;
     public bool FireHeld;
-    public bool ShockwavePressed;
+    public bool ShockwavePressed; 
+}
+
+public struct PlayerAimDirection : IComponentData
+{
+    public float3 Value;
 }
 
 [MaterialProperty("_Radius")]
@@ -121,4 +126,34 @@ public struct HealthBarFill : IComponentData
 public struct HealthBarOwner : IComponentData
 {
     public Entity EnemyEntity; 
+}
+
+[MaterialProperty("_FrameOffset")]
+public struct SpriteFrameOffset : IComponentData
+{
+    public float2 Value;
+}
+
+public struct SpriteAnimator : IComponentData
+{
+    public int CurrentFrame;
+    public int TotalFrames;
+    public int Columns;
+    public int Rows;        // total rows in sheet
+    public int CurrentRow;  // which row we're playing
+    public float FrameRate;
+    public float ElapsedTime;
+    public bool IsLooping;
+    public int CompleteSince;
+}
+
+[MaterialProperty("_FlipX")] 
+public struct SpriteFlipX : IComponentData
+{
+    public float Value; // 0 = normal, 1 = flipped
+}
+public struct DeathAnimData : IComponentData
+{
+    public int RowIndex; 
+    public float FrameRate;
 }
