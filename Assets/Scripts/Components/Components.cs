@@ -9,7 +9,7 @@ public struct ProjectileTag : IComponentData { }
 public struct AoeTag : IComponentData { }
 public struct ShockwaveTag : IComponentData { }
 public struct PlayerTag : IComponentData { }
-public struct DyingTag : IComponentData { }
+public struct DyingTag : IComponentData, IEnableableComponent { } 
 public struct Direction : IComponentData
 {
     public float3 Value;
@@ -21,6 +21,7 @@ public struct Health : IComponentData
     public float Current;
     public float Max;
 }
+public struct HealthDirty : IComponentData, IEnableableComponent { }
 
 public struct Damage : IComponentData
 {
@@ -85,6 +86,7 @@ public struct SpawnerData : IComponentData
 
     public int MinSpawnCount;
     public int MaxSpawnCount;
+    public int MaxEnemyCount;
     public float BaseInterval;    // starting spawn interval
     public float MinInterval;     // cap so it doesn't get insane
     public float RampRate;        // how fast interval shrinks over time

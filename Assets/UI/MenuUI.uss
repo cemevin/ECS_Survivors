@@ -1,0 +1,51 @@
+#menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 24px;
+    border-radius: 12px;
+    min-width: 300px;
+    align-items: stretch;
+}
+
+#menu > Label {
+    color: white;
+    font-size: 20px;
+    -unity-font-style: bold;
+    margin-bottom: 16px;
+    -unity-text-align: upper-center;
+}
+
+#menu Label {
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+#menu .unity-slider {
+    margin-bottom: 12px;
+}
+
+#menu Button {
+    margin-top: 8px;
+    height: 40px;
+    background-color: rgb(0, 180, 80);
+    border-width: 0;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+#menu Button:hover {
+    background-color: rgb(0, 210, 90);
+}
+
+#menu Toggle {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+}

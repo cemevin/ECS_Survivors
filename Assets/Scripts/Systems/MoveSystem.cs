@@ -1,8 +1,8 @@
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
 public partial struct MoveSystem : ISystem
 {
@@ -14,6 +14,6 @@ public partial struct MoveSystem : ISystem
             SystemAPI.Query<RefRW<LocalTransform>, RefRO<Direction>, RefRO<MoveSpeed>>())
         {
             transform.ValueRW.Position += direction.ValueRO.Value * dt * speed.ValueRO.Value;
-        }
+        } 
     }
 }

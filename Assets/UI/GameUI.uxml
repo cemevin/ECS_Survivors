@@ -1,8 +1,9 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <Style src="GameUI.uss" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GameUI.uss?fileID=7433441132597879392&amp;guid=67ffe565d6520d3449829942a5e906de&amp;type=3#GameUI"/>
+    <ui:Label name="fps" text="FPS: 0" style="right: 16px; -unity-text-align: upper-center; position: absolute; top: 16px;"/>
     <ui:VisualElement name="hud">
-        <ui:Label name="enemy-count" text="Enemies: 0" />
-        <ui:Label name="health" text="HP: 0/0" />
-        <ui:Label name="shockwave" text="Shockwave: Ready" />
+        <ui:Label name="enemy-count" text="Enemies: 0"/>
+        <ui:Label name="health" text="HP: 0/0"/>
+        <ui:Label name="shockwave" text="Shockwave: Ready"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,9 +1,7 @@
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
-using Unity.Collections;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
 public partial struct LifetimeSystem : ISystem
 {
@@ -19,7 +17,7 @@ public partial struct LifetimeSystem : ISystem
             lifetime.ValueRW.Remaining -= dt;
             if (lifetime.ValueRO.Remaining <= 0f)
             {
-                ecb.DestroyEntity(entity);
+                ecb.DestroyEntity(entity); 
             }
         }
     }

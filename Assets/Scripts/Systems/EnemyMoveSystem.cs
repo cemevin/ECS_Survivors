@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
 public partial struct EnemyMoveSystem : ISystem
 {
@@ -19,7 +20,7 @@ public partial struct EnemyMoveSystem : ISystem
 
         foreach (var (transform, impulseVelocity, damage, speed, flip) in
             SystemAPI.Query<RefRW<LocalTransform>, RefRW<ImpulseVelocity>, RefRO<Damage>, RefRO<MoveSpeed>, RefRW<SpriteFlipX>>()
-                     .WithAll<EnemyTag>().WithAbsent<DyingTag>())
+                     .WithAll<EnemyTag>().WithDisabled<DyingTag>()) 
         {
             // combine player seek + impulse velocities and update transform
             float3 distvec = playerPos - transform.ValueRO.Position;

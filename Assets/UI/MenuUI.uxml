@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="MenuUI.uss" />
+    <ui:VisualElement name="menu" style="display: none;">
+        <ui:DropdownField name="resolution" label="Resolution" />
+        <ui:Toggle name="fullscreen" label="Fullscreen" value="true" />
+        
+        <ui:Label text="Spawner Settings" />
+        
+        <ui:Label name="spawn-rate-label" text="Spawn Interval: 0.50s" />
+        <ui:Slider name="spawn-rate" low-value="0.1" high-value="3.0" value="0.5" />
+        
+        <ui:Label name="spawn-min-count-label" text="Min Spawn: 5" />
+        <ui:SliderInt name="spawn-min-count" low-value="1" high-value="1000" value="5" />
+        
+        <ui:Label name="spawn-max-count-label" text="Max Spawn: 5" />
+        <ui:SliderInt name="spawn-max-count" low-value="1" high-value="1000" value="5" />
+        
+        <ui:Label name="enemy-max-count-label" text="Max Enemies: 250" />
+        <ui:SliderInt name="enemy-max-count" low-value="1" high-value="10000" value="5" />
+
+        <ui:Button name="resume-btn" text="Resume" />
+    </ui:VisualElement>
+</ui:UXML>

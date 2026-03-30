@@ -59,6 +59,12 @@ public class EnemyAuthoring : MonoBehaviour
                 RowIndex = authoring.DeathAnimRowIndex,
                 FrameRate = authoring.DeathAnimFrameRate
             });
+
+            AddComponent(e, new DyingTag());
+            SetComponentEnabled<DyingTag>(e, false); 
+            
+            AddComponent(e, new HealthDirty());
+            SetComponentEnabled<HealthDirty>(e, false);
         }
     }
 }

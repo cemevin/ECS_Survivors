@@ -1,6 +1,5 @@
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Transforms;
 
 [BurstCompile]
 [UpdateInGroup(typeof(SimulationSystemGroup))]
@@ -11,7 +10,7 @@ public partial struct EnemyDeathSystem : ISystem
         state.RequireForUpdate<EnemyTag>();
     }
 
-    public void OnUpdate(ref SystemState state)
+    public void OnUpdate(ref SystemState state) 
     {
         var ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);

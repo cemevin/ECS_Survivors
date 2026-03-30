@@ -1,12 +1,19 @@
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.Collections;
 using Unity.Mathematics;
 
 [BurstCompile]
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct SpawnSystem : ISystem
 {
+    EntityQuery _enemyQuery;
+
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<SpawnerData>();
+        _enemyQuery = state.GetEntityQuery(ComponentType.ReadOnly<EnemyTag>());
+    }
     public void OnUpdate(ref SystemState state)
     {
         float dt = SystemAPI.Time.DeltaTime;
@@ -17,6 +24,8 @@ public partial struct SpawnSystem : ISystem
         var playerQuery = SystemAPI.QueryBuilder()
             .WithAll<PlayerTag, LocalTransform>().Build();
         if (playerQuery.IsEmpty) return;
+
+        int numEnemiesInGame = _enemyQuery.CalculateEntityCount();
 
         float3 playerPos = playerQuery.GetSingleton<LocalTransform>().Position;
 
@@ -34,7 +43,7 @@ public partial struct SpawnSystem : ISystem
             spawner.ValueRW.Timer = spawner.ValueRO.BaseInterval;
 
             int numEnemies = spawner.ValueRW.Rng.NextInt(spawner.ValueRO.MinSpawnCount, spawner.ValueRO.MaxSpawnCount);
-            for (int i = 0; i < numEnemies; i++)
+            for (int i = 0; i < numEnemies; i++) 
             {
                 // random point in band around player
                 float angle = spawner.ValueRW.Rng.NextFloat(0, math.PI2);
@@ -53,6 +62,12 @@ public partial struct SpawnSystem : ISystem
                     quaternion.Euler(math.radians(90f), 0f, 0f),
                     1f
                 ));
+
+                numEnemiesInGame++;
+                if (numEnemiesInGame >= spawner.ValueRO.MaxEnemyCount)
+                {
+                    break;  
+                }
             }
         }
     }

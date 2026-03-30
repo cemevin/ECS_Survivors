@@ -2,7 +2,6 @@ using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Mathematics;
-using Unity.Transforms;
 
 [UpdateInGroup(typeof(InitializationSystemGroup))]
 public partial class InputGatheringSystem : SystemBase,
@@ -50,7 +49,7 @@ public partial class InputGatheringSystem : SystemBase,
 
     // callbacks — fire on input thread, just store values
 
-    protected override void OnUpdate()
+    protected override void OnUpdate() 
     {
         // push to singleton each frame
         if (_playerInputQuery.CalculateEntityCount() == 0)
@@ -63,7 +62,7 @@ public partial class InputGatheringSystem : SystemBase,
             // use mouse
             _aimInput = mouseValue;
         }
-        
+
         _playerInputQuery.SetSingleton(new PlayerInput
         {
             MoveStick = _moveInput,

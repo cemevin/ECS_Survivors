@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -22,7 +21,7 @@ public partial struct SpriteAnimationSystem : ISystem
             animator.ValueRW.ElapsedTime += dt;
             if (animator.ValueRO.ElapsedTime < 1f / animator.ValueRO.FrameRate) continue;
 
-            animator.ValueRW.ElapsedTime = 0f;
+            animator.ValueRW.ElapsedTime = 0f;  
 
             int nextFrame = animator.ValueRO.CurrentFrame + 1;
 

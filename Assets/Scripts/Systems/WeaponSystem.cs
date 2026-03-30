@@ -1,12 +1,12 @@
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
 
 [BurstCompile]
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct WeaponSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
@@ -66,7 +66,7 @@ public partial struct WeaponSystem : ISystem
                 float3 dir = MathUtils.RotateAroundY(aimDir, angle);
 
                 Entity spawned = ecb.Instantiate(projectilePrefab);
-                ecb.SetComponent(spawned, LocalTransform.FromPosition(playerPos));
+                ecb.SetComponent(spawned, LocalTransform.FromPosition(playerPos)); 
 
                 float scale = SystemAPI.GetComponent<PrefabScale>(projectilePrefab).Value;
                 ecb.SetComponent(spawned, LocalTransform.FromPositionRotationScale(

@@ -3,9 +3,9 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 [BurstCompile]
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct ShockwaveSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
@@ -42,8 +42,8 @@ public partial struct ShockwaveSystem : ISystem
             // then iterate enemies against collected shockwave data
             foreach (var (enemyTransform, health, impulse, enemyEntity) in
                 SystemAPI.Query<RefRO<LocalTransform>, RefRW<Health>, RefRW<ImpulseVelocity>>()
-                        .WithAll<EnemyTag>().WithAbsent<DyingTag>().WithDisabled<ShockwaveImpactCooldown>()
-                        .WithEntityAccess())
+                        .WithAll<EnemyTag>().WithDisabled<DyingTag, ShockwaveImpactCooldown>()
+                        .WithEntityAccess()) 
             {
                 for (int i = 0; i < shockwaves.Length; i++)
                 {
@@ -52,10 +52,11 @@ public partial struct ShockwaveSystem : ISystem
                     if (dist < r + 0.5f && dist > r - 0.5f)
                     {
                         health.ValueRW.Current -= dmg;
+                        ecb.SetComponentEnabled<HealthDirty>(enemyEntity, true);
 
                         if (health.ValueRO.Current <= 0f)
                         {
-                            ecb.AddComponent(enemyEntity, new DyingTag());
+                            ecb.SetComponentEnabled<DyingTag>(enemyEntity, true);
                         }
                         else
                         {

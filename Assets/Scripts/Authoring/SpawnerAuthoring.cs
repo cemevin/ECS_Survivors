@@ -6,6 +6,7 @@ public class SpawnerAuthoring : MonoBehaviour
 {
     public int MinSpawnCount = 5;
     public int MaxSpawnCount = 10;
+    public int MaxEnemyCount = 250;
 
     public float BaseInterval = 5;    // starting spawn interval
     public float MinInterval = 0.3f;     // cap so it doesn't get insane
@@ -24,6 +25,7 @@ public class SpawnerAuthoring : MonoBehaviour
                 Timer = authoring.BaseInterval,  
                 MinSpawnCount = authoring.MinSpawnCount,
                 MaxSpawnCount = authoring.MaxSpawnCount,
+                MaxEnemyCount = authoring.MaxEnemyCount,
                 BaseInterval = authoring.BaseInterval, 
                 MinInterval = authoring.MinInterval, 
                 RampRate = authoring.RampRate, 

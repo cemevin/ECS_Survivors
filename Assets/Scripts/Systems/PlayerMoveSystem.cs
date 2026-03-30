@@ -16,7 +16,7 @@ public partial struct PlayerMoveSystem : ISystem
                      .WithAll<PlayerTag>())
         {
             float3 Move = new float3(input.ValueRO.MoveStick.x, 0, input.ValueRO.MoveStick.y);
-            transform.ValueRW.Position += Move * speed.ValueRO.Value * dt;
+            transform.ValueRW.Position += Move * speed.ValueRO.Value * dt; 
         }
     }
 }

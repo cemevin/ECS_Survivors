@@ -16,14 +16,21 @@ public class PlayerVisual : MonoBehaviour
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
-        var q = _em.CreateEntityQuery(typeof(PlayerTag));
-        if (!q.IsEmpty) _playerEntity = q.GetSingletonEntity();
-        q.Dispose();
     }
-
     void LateUpdate()
     {
-        if (_playerEntity == Entity.Null) return;
+        if (_playerEntity == Entity.Null)
+        {
+            var q = _em.CreateEntityQuery(typeof(PlayerTag));
+            if (q.IsEmpty) 
+            {
+                q.Dispose();
+                return;
+            }
+            _playerEntity = q.GetSingletonEntity();
+            q.Dispose();
+        }
+
         if (!_em.Exists(_playerEntity)) return;
 
         var transform = _em.GetComponentData<LocalTransform>(_playerEntity);

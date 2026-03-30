@@ -1,7 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
 
-
 [BurstCompile]
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct ShockwaveCooldownSystem : ISystem
@@ -16,7 +15,7 @@ public partial struct ShockwaveCooldownSystem : ISystem
                      .WithEntityAccess())
         {
             if (elapsed >= cooldown.ValueRO.ExpiryTime)
-                SystemAPI.SetComponentEnabled<ShockwaveImpactCooldown>(entity, false);
+                SystemAPI.SetComponentEnabled<ShockwaveImpactCooldown>(entity, false); 
         }
     }
-}
+} 

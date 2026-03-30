@@ -13,14 +13,23 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         _em = World.DefaultGameObjectInjectionWorld.EntityManager;
-        var query = _em.CreateEntityQuery(typeof(PlayerTag), typeof(LocalTransform));
-        if (!query.IsEmpty)
-            _playerEntity = query.GetSingletonEntity();
     }
 
     void LateUpdate()
     {
-        if (_playerEntity == Entity.Null) return;
+        if (_playerEntity == Entity.Null)
+        {
+            var q = _em.CreateEntityQuery(typeof(PlayerTag));
+            if (q.IsEmpty)
+            {
+                q.Dispose();
+                return;
+            }
+            _playerEntity = q.GetSingletonEntity();
+            q.Dispose();
+        }
+        if (!_em.Exists(_playerEntity)) return;
+
         var transform = _em.GetComponentData<LocalTransform>(_playerEntity);
         Vector3 target = new Vector3(transform.Position.x, Height, transform.Position.z);
         this.transform.position = Vector3.Lerp(this.transform.position, target, Smoothing * Time.deltaTime);

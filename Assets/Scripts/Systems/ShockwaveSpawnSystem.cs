@@ -2,7 +2,6 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 [BurstCompile]
 [UpdateInGroup(typeof(SimulationSystemGroup))]
@@ -20,7 +19,7 @@ public partial struct ShockwaveSpawnSystem : ISystem
         var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
         Entity prefab = SystemAPI.GetSingleton<ShockwavePrefabRef>().Value;
         
-        float elapsed = (float)SystemAPI.Time.ElapsedTime;
+        float elapsed = (float)SystemAPI.Time.ElapsedTime; 
 
         foreach (var (input, weapon, transform) in
             SystemAPI.Query<RefRO<PlayerInput>, RefRW<WeaponData>, RefRO<LocalTransform>>()
